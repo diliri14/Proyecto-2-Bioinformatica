@@ -1,0 +1,291 @@
+package estructuras;
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
+/**
+ *
+ * @author Diego Linares
+ */
+public class ArbolBB {
+    private NodoArbol raiz;
+    
+    /*
+     * Constructor que inicializa un árbol vacío.
+     */
+    public ArbolBB() {
+        this.raiz = null;
+    }
+    
+    /*
+     * Verifica si el árbol está vacío.
+     * 
+     * @return true si el árbol no contiene raíz, false en caso contrario
+     */
+    public Boolean esVacio() {
+        return raiz == null;
+    }
+    
+    /*
+     * Obtiene la altura de un nodo específico.
+     * Si es nulo se considera como 0.
+     *
+     * @param nodo El nodo del cual se desea obtener la altura.
+     * @return La altura del nodo especificado, o 0 si el nodo es nulo.
+     */
+    private int altura(NodoArbol nodo) {
+        if (nodo == null) {
+            return 0;
+        }
+        else {
+            return nodo.getAltura();
+        }
+    }
+    
+    /*
+     * Actualiza la altura de un nodo basándose en la altura de sus hijos.
+     * Esto con el objetivo de mantener el árbol con estructura AVL.
+     * Llamado después de que se cambie la estrucutra del árbol a través de inserciones o rotaciones. 
+     *
+     * @param true El nodo que debe actualizar su altura.
+     */
+    private void actualizarAltura(NodoArbol nodo) {
+        if (nodo != null) {
+            nodo.setAltura(1 + Math.max(altura(nodo.getHijoIzq()), altura(nodo.getHijoDer())));
+        }
+    }
+    
+    /*
+     * Calcula la diferencia entre la altura de ambos hijos de un nodo.
+     * Un nodo está balanceado si Balance() se encuentra entre -1 y 1.
+     *
+     * @param El nodo de cual se desea conocer su balance.
+     * @return el factor de balanceo del nodo (entero).
+     */
+    private int Balance(NodoArbol nodo) {
+        if (nodo == null) {
+            return 0;
+        }
+        return altura(nodo.getHijoIzq()) - altura(nodo.getHijoDer());
+    }
+    
+    /*
+     * Realiza una rotación simple a la derecha.
+     * Esta rotación se aplica cuando hay un desbalance en el subárbol izquierdo del hijo izquierdo (caso LL).
+     * El nodo 'y' es la raíz del subárbol desbalanceado.
+     *
+     * @param y El nodo raíz del subárbol a rotar (el nodo desbalanceado).
+     * @return La nueva raíz del subárbol después de la rotación.
+     */
+    private NodoArbol rotarDerecha(NodoArbol y) {
+        NodoArbol x = y.getHijoIzq();
+        NodoArbol T2 = x.getHijoDer();
+
+        x.setHijoIzq(y);
+        y.setHijoDer(T2);
+
+        actualizarAltura(y);
+        actualizarAltura(x);
+
+        return x;
+    }
+
+    /*
+     * Realiza una rotación simple a la izquierda.
+     * Esta rotación se aplica cuando hay un desbalance en el subárbol derecho del hijo derecho (caso RR).
+     * El nodo 'x' es la raíz del subárbol desbalanceado.
+     *
+     * @param x El nodo raíz del subárbol a rotar (el nodo desbalanceado).
+     * @return La nueva raíz del subárbol después de la rotación.
+     */
+    private NodoArbol rotarIzquierda(NodoArbol x) {
+        NodoArbol y = x.getHijoIzq();
+        NodoArbol T2 = y.getHijoDer();
+
+        y.setHijoIzq(x);
+        x.setHijoDer(T2);
+
+        actualizarAltura(x);
+        actualizarAltura(y);
+
+        return y;
+    }
+    
+    /*
+     * Inserta un patrón de ADN y su posición en el árbol AVL.
+     * Se realiza de forma recursiva y el árbol se auto-balancea
+     *
+     * @param patron El patrón de ADN (String) a insertar.
+     * @param posicion La posición (Integer) asociada al patrón en la secuencia principal.
+     */
+    public void insertar(String patron, int posicion) {
+        raiz = metodoInsertar(raiz, patron, posicion);
+    }
+    
+    /*
+     * Método auxiliar recursivo para insertar un patrón en el árbol AVL.
+     * También actualiza alturas y crea rotaciones para mantener el balanceo AVL.
+     *
+     * @param aux El nodo actual en el subárbol que se está procesando en la recursión.
+     * @param patron El patrón de ADN a insertar.
+     * @param posicion La posición asociada al patrón.
+     * @return La nueva raíz del subárbol después de la inserción y/o balanceo.
+     */
+    private NodoArbol metodoInsertar(NodoArbol aux, String patron, int posicion) {
+        if (esVacio()) {
+            raiz = aux; 
+        }
+        else {
+            int comparacion = patron.compareTo(aux.getPatron());
+
+            if (comparacion < 0) {
+                metodoInsertar(raiz.getHijoIzq(), patron, posicion);
+            } else if (comparacion > 0) {
+                metodoInsertar(raiz.getHijoDer(), patron, posicion);
+            } else {
+                aux.insertarPosicion(posicion);
+                return aux;
+            }
+        }
+        
+        actualizarAltura(aux);
+
+        int balance = Balance(aux);
+
+        if (balance > 1 && patron.compareTo(aux.getHijoIzq().getPatron()) < 0) {
+            return rotarDerecha(aux);
+        }
+
+        if (balance < -1 && patron.compareTo(aux.getHijoDer().getPatron()) > 0) {
+            return rotarIzquierda(aux);
+        }
+
+        if (balance > 1 && patron.compareTo(aux.getHijoIzq().getPatron()) > 0) {
+            aux.setHijoIzq(rotarIzquierda(aux.getHijoIzq()));
+            return rotarDerecha(aux);
+        }
+
+        if (balance < -1 && patron.compareTo(aux.getHijoDer().getPatron()) < 0) {
+            aux.setHijoDer(rotarDerecha(aux.getHijoDer()));
+            return rotarIzquierda(aux);
+        }
+        
+        return aux;
+    }
+    
+    
+    /*
+     * Busca un patrón de ADN específico en el árbol AVL.
+     *
+     * @param patron El patrón de ADN (String) a buscar.
+     * @return El NodoArbol que contiene el patrón y sus posiciones, o null si el patrón no se encuentra.
+     */
+    public NodoArbol buscar(String patron) {
+        return metodoBuscar(raiz, patron);
+    }
+    
+    /*
+     * Método auxiliar recursivo para buscar un patrón en el árbol.
+     *
+     * @param aux El nodo actual en el subárbol que se está procesando en la recursión.
+     * @param patron El patrón de ADN a buscar.
+     * @return El NodoArbol que contiene el patrón, o null si no se encuentra.
+     */
+    private NodoArbol metodoBuscar(NodoArbol aux, String patron) {
+        if (aux == null || aux.getPatron().equals(patron)) {
+            return aux;
+        }
+
+        if (patron.compareTo(aux.getPatron()) < 0) {
+            return metodoBuscar(aux.getHijoIzq(), patron);
+        } else {
+            return metodoBuscar(aux.getHijoDer(), patron);
+        }
+    }
+    
+    
+    /*
+     * Realiza un recorrido Inorden del árbol AVL.
+     * Los elementos se visitan en orden: hijo izquierdo, nodo actual, hijo derecho.
+     * Esto resulta en una lista de patrones ordenados alfabéticamente.
+     *
+     * @return Una ListaSimple de Strings con los patrones en orden inorden.
+     */
+    public ListaSimple<String> inorden() {
+        ListaSimple<String> orden = new ListaSimple<>();
+        inorden(raiz, orden); // Llama al método recursivo auxiliar
+        return orden;
+    }
+    
+    /*
+     * Método auxiliar recursivo para realizar el recorrido Inorden.
+     * Este método acumula los patrones en la lista proporcionada.
+     *
+     * @param nodo El nodo actual en el subárbol que se está procesando en la recursión.
+     * @param lista La lista donde se acumularán los patrones visitados.
+     */
+    private void inorden(NodoArbol nodo, ListaSimple<String> lista) {
+        if (nodo != null) {
+            inorden(nodo.getHijoIzq(), lista);
+            lista.insertarAlFinal(nodo.getPatron());
+            inorden(nodo.getHijoDer(), lista);
+        }
+    }
+    
+    /*
+     * Realiza un recorrido Preorden del árbol AVL.
+     * Los elementos se visitan en orden: nodo actual, hijo izquierdo, hijo derecho.
+     *
+     * @return Una ListaSimple de Strings con los patrones en orden inorden.
+     */
+    public ListaSimple<String> preorden() {
+        ListaSimple<String> orden = new ListaSimple<>();
+        preorden(raiz, orden); // Llama al método recursivo auxiliar
+        return orden;
+    }
+    
+    /*
+     * Método auxiliar recursivo para realizar el recorrido Preorden.
+     * Este método acumula los patrones en la lista proporcionada.
+     *
+     * @param nodo El nodo actual en el subárbol que se está procesando en la recursión.
+     * @param lista La lista donde se acumularán los patrones visitados.
+     */
+    private void preorden(NodoArbol nodo, ListaSimple<String> lista) {
+        if (nodo != null) {
+            lista.insertarAlFinal(nodo.getPatron());
+            preorden(nodo.getHijoIzq(), lista);
+            preorden(nodo.getHijoDer(), lista);
+        }
+    }
+    
+    /*
+     * Realiza un recorrido Preorden del árbol AVL.
+     * Los elementos se visitan en orden: hijo izquierdo, hijo derecho, nodo actual.
+     *
+     * @return Una ListaSimple de Strings con los patrones en orden inorden.
+     */
+    public ListaSimple<String> postorden() {
+        ListaSimple<String> orden = new ListaSimple<>();
+        postorden(raiz, orden); // Llama al método recursivo auxiliar
+        return orden;
+    }
+    
+    /*
+     * Método auxiliar recursivo para realizar el recorrido Postorden.
+     * Este método acumula los patrones en la lista proporcionada.
+     *
+     * @param nodo El nodo actual en el subárbol que se está procesando en la recursión.
+     * @param lista La lista donde se acumularán los patrones visitados.
+     */
+    private void postorden(NodoArbol nodo, ListaSimple<String> lista) {
+        if (nodo != null) {
+            postorden(nodo.getHijoIzq(), lista);
+            postorden(nodo.getHijoDer(), lista);
+            lista.insertarAlFinal(nodo.getPatron());
+        }
+    }
+}
+
