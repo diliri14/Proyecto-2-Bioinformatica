@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package main;
+import gui.Interfaz1;
 
 /**
  *
@@ -15,6 +16,8 @@ public class Bioinformatica {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        Interfaz1 interfaz = new Interfaz1();
+        interfaz.setVisible(true);
     }
     
 }
