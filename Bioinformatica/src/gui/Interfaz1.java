@@ -168,6 +168,7 @@ public class Interfaz1 extends javax.swing.JFrame {
                 }else{
                     if (procesador.leerArchivo(archivoSeleccionado)){
                         procesador.procesarSecuencia(tabla);
+                        procesador.detectorSobrantes();
                         datosCargados=true;
                         JOptionPane.showMessageDialog(this, "Datos cargados con éxito.","Carga de archivo",JOptionPane.INFORMATION_MESSAGE);
                     }
