@@ -56,6 +56,18 @@ public class ProcesadorArchivo {
         }    
     }
     
+    //funcionalidad adicional. luego del mensaje de la advertencia abajo, se imprimiria el archivo cargado con exito.
+    public void detectorSobrantes(){
+        if (secuenciaADN==null){
+            return;
+        }else{
+            int sobrantes=secuenciaADN.length()%3;
+            if (sobrantes > 0) {
+                JOptionPane.showMessageDialog(null,"La secuencia tiene " + sobrantes +" caracter(es) al final que no forman una tripleta y serán ignorados.","Advertencia", JOptionPane.WARNING_MESSAGE);
+            }
+        }
+    }
+    
     public String getSecuenciaADN() {
         return secuenciaADN;
     }
