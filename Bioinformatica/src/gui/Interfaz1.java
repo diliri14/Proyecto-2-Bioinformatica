@@ -4,13 +4,19 @@
  */
 package gui;
 
+import estructuras.Hashtable;
+import estructuras.ArbolBB;
+import estructuras.NodoArbol;
+import estructuras.ListaSimple;
+import estructuras.NodoSimple;
+import javax.swing.*;
 /**
  *
- * @author diego
+ * @author Diego Linares, Luis Peña y Luis Lovera
  */
 public class Interfaz1 extends javax.swing.JFrame {
 
-    /**
+    /*
      * Creates new form Interfaz1
      */
     public Interfaz1() {
@@ -26,21 +32,40 @@ public class Interfaz1 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        CargarArchivo = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        CargarArchivo.setText("Cargar archivo");
+        CargarArchivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CargarArchivoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(141, 141, 141)
+                .addComponent(CargarArchivo)
+                .addContainerGap(152, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(CargarArchivo)
+                .addContainerGap(235, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void CargarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarArchivoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CargarArchivoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +103,6 @@ public class Interfaz1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton CargarArchivo;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,7 +5,9 @@ package estructuras;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
-/**
+/*
+ * Implementación de un Árbol Binario de Búsqueda que se auto-balancea, es decir un Árbol AVL.
+ * Almacena patrones de ADN (Strings) como claves y una lista de posiciones (ListaSimple<Integer>) donde cada patrón aparece en la secuencia principal de ADN.
  *
  * @author Diego Linares
  */
