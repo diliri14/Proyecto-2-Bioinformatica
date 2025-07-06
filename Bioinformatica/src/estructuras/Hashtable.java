@@ -39,7 +39,7 @@ public class Hashtable {
             case 'A': return 0;
             case 'C': return 1;
             case 'G': return 2;
-            case 'U': return 3;
+            case 'T': return 3; //esto lo cambie a t por lo de adn. REVISAR RESTO DE CLASE
             default: return -1;
         }
     }

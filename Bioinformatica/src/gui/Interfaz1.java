@@ -9,6 +9,7 @@ import estructuras.ArbolBB;
 import estructuras.NodoArbol;
 import estructuras.ListaSimple;
 import estructuras.NodoSimple;
+import estructuras.ProcesadorArchivo;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
@@ -18,15 +19,21 @@ import java.io.File;
  * @author Diego Linares, Luis Peña y Luis Lovera
  */
 public class Interfaz1 extends javax.swing.JFrame {
-    private DefaultListModel<String> listaModeloPatrones = new DefaultListModel<>();
+    private DefaultListModel<String> listaModeloPatrones;
+    private ProcesadorArchivo procesador;
+    private Hashtable tabla;
+    private boolean datosCargados;
 
     /*
      * Creates new form Interfaz1
      */
     public Interfaz1() {
         initComponents();
+        listaModeloPatrones = new DefaultListModel<>();
         verListaPatrones.setModel(listaModeloPatrones);
-       
+        procesador = new ProcesadorArchivo();
+        tabla = new Hashtable();
+        datosCargados=false;
     }
 
     /**
@@ -142,6 +149,12 @@ public class Interfaz1 extends javax.swing.JFrame {
     private void cargarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarArchivoActionPerformed
         // TODO add your handling code here:
         try{
+            
+            if (datosCargados){
+                JOptionPane.showMessageDialog(this, "Por favor, presione el botón 'Reiniciar' antes de cargar otro archivo.", "Atención", JOptionPane.WARNING_MESSAGE);
+                return;   
+            }
+            
             JFileChooser archivo = new JFileChooser();
             archivo.setFileFilter(new FileNameExtensionFilter("Archivos de texto (*.txt)", "txt"));
 
@@ -150,22 +163,29 @@ public class Interfaz1 extends javax.swing.JFrame {
             if (result == JFileChooser.APPROVE_OPTION) {
                 File archivoSeleccionado = archivo.getSelectedFile();
       
-                if (archivoSeleccionado==null){
-                    JOptionPane.showMessageDialog(null, "No seleccionaste ningún archivo.","Error",JOptionPane.ERROR_MESSAGE);
-                    return;   
+                if (archivoSeleccionado==null || !archivoSeleccionado.exists()){
+                    JOptionPane.showMessageDialog(this, "No seleccionaste ningún archivo.","Error",JOptionPane.ERROR_MESSAGE);
+                }else{
+                    if (procesador.leerArchivo(archivoSeleccionado)){
+                        procesador.procesarSecuencia(tabla);
+                        datosCargados=true;
+                        JOptionPane.showMessageDialog(this, "Datos cargados con éxito.","Carga de archivo",JOptionPane.INFORMATION_MESSAGE);
+                    }
                 }
             }
-             
                 
         }catch (Exception e){
-            JOptionPane.showMessageDialog(null, "Ocurrió un error. Intenta de nuevo: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);    
+            JOptionPane.showMessageDialog(this, "Ocurrió un error. Intente de nuevo: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);    
         }
     }//GEN-LAST:event_cargarArchivoActionPerformed
 
     private void reiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reiniciarActionPerformed
         // TODO add your handling code here:
         listaModeloPatrones.clear();
-        verInfoPatron.setText("");        
+        verInfoPatron.setText("");
+        tabla=new Hashtable();
+        procesador=new ProcesadorArchivo();
+        datosCargados=false;
     }//GEN-LAST:event_reiniciarActionPerformed
 
     /**

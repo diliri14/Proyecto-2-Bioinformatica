@@ -17,6 +17,8 @@ public class Bioinformatica {
     public static void main(String[] args) {
         // TODO code application logic here
         Interfaz1 interfaz = new Interfaz1();
+        interfaz.setTitle("Sistema de Identificación y Análisis de Secuencias");
+        interfaz.setLocationRelativeTo(null);
         interfaz.setVisible(true);
     }
     

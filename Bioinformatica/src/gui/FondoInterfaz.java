@@ -8,7 +8,7 @@ import java.awt.*;
 
 /**
  *
- * @author luismarianolovera
+ * @author Luis Mariano Lovera
  */
 public class FondoInterfaz extends JPanel{
     private Image imagen;
