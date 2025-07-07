@@ -49,7 +49,7 @@ public class ProcesadorArchivo {
         }
     }
     
-    public void procesarSecuencia(Hashtable tabla){
+    public void construirTabla(Hashtable tabla){
         for (int i = 0; i < secuenciaADN.length()-3; i += 3) {
             String fragmento = secuenciaADN.substring(i, i + 3);
             tabla.insertar(fragmento, i);     
@@ -65,6 +65,17 @@ public class ProcesadorArchivo {
             if (sobrantes > 0) {
                 JOptionPane.showMessageDialog(null,"La secuencia tiene " + sobrantes +" caracter(es) al final que no forman una tripleta y serán ignorados.","Advertencia", JOptionPane.WARNING_MESSAGE);
             }
+        }
+    }
+    
+    public void construirArbol(Hashtable tabla, ArbolBB arbol) {
+        ListaSimple<NodoArbol>patrones=tabla.obtenerPatrones();
+        NodoSimple<NodoArbol>aux=patrones.getFirst();
+        while (aux!=null) {
+            String patron=aux.getData().getPatron();
+            ListaSimple<Integer>posiciones=aux.getData().getPosiciones();
+            arbol.insertar(patron, posiciones);
+            aux=aux.getNext();
         }
     }
     

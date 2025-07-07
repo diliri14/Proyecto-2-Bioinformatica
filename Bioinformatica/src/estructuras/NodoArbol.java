@@ -24,10 +24,9 @@ public class NodoArbol {
      * @param patron El patrón (secuencia de 3 caracteres de ADN) de este nodo.
      * @param posicion La primera posición (índice) donde se encontró este patrón.
      */
-    public NodoArbol(String patron, int posicion) {
+    public NodoArbol(String patron, ListaSimple<Integer> posiciones) {
         this.patron = patron;
-        this.posiciones = new ListaSimple<>();
-        this.posiciones.insertarAlFinal(posicion);
+        this.posiciones=posiciones;
         this.hijoIzq = null;
         this.hijoDer = null;
         this.altura = 1;
@@ -44,6 +43,10 @@ public class NodoArbol {
 
     public ListaSimple<Integer> getPosiciones() {
         return posiciones;
+    }
+    
+    public int getFrecuencias(){
+        return posiciones.getTamaño();
     }
 
     public void insertarPosicion(int posicion) {

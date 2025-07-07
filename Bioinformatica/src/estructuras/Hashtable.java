@@ -86,7 +86,9 @@ public class Hashtable {
             }
             aux = aux.getNext();
         }
-        cubo.insertarAlFinal(new NodoArbol(patron, posicion));
+        ListaSimple<Integer> lista = new ListaSimple<>();
+        lista.insertarAlFinal(posicion);
+        cubo.insertarAlFinal(new NodoArbol(patron, lista));
     }
 
     /*

@@ -78,6 +78,26 @@ public class ListaSimple<T> {
         return cadena;
     } 
     
+    public String mostrarListaPosiciones() {
+        String cadena = "";
+        NodoSimple aux = first;
+        int contador = 0;
+        while (aux != null) {
+            cadena = cadena + aux.getData();
+            aux = aux.getNext();
+            contador++;
+            if (aux != null) {
+                if (contador % 15==0) {
+                    //Espacio para que se visualizen las ubicaciones de forma alineada
+                    cadena = cadena + ",\n                     ";
+                } else {
+                    cadena = cadena + ", ";
+                }
+            }
+        }
+        return cadena;
+    }
+    
     /*
     * Verifica si un elemento específico existe en la lista.
     * La comparación se realiza usando el método equals() del elemento.
