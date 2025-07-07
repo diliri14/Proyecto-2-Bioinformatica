@@ -82,11 +82,15 @@ public class ArbolBB {
      * @return La nueva raíz del subárbol después de la rotación.
      */
     private NodoArbol rotarDerecha(NodoArbol y) {
+        if (y==null || y.getHijoIzq()==null) {
+            return y;
+        }
+        
         NodoArbol x = y.getHijoIzq();
         NodoArbol T2 = x.getHijoDer();
 
-        x.setHijoIzq(y);
-        y.setHijoDer(T2);
+        x.setHijoDer(y);
+        y.setHijoIzq(T2);
 
         actualizarAltura(y);
         actualizarAltura(x);
@@ -103,8 +107,12 @@ public class ArbolBB {
      * @return La nueva raíz del subárbol después de la rotación.
      */
     private NodoArbol rotarIzquierda(NodoArbol x) {
-        NodoArbol y = x.getHijoIzq();
-        NodoArbol T2 = y.getHijoDer();
+        if (x==null || x.getHijoDer()==null) {
+            return x;
+        }
+        
+        NodoArbol y = x.getHijoDer();
+        NodoArbol T2 = y.getHijoIzq();
 
         y.setHijoIzq(x);
         x.setHijoDer(T2);
@@ -122,8 +130,8 @@ public class ArbolBB {
      * @param patron El patrón de ADN (String) a insertar.
      * @param posicion La posición (Integer) asociada al patrón en la secuencia principal.
      */
-    public void insertar(String patron, int posicion) {
-        raiz = metodoInsertar(raiz, patron, posicion);
+    public void insertar(String patron, ListaSimple<Integer> posiciones) {
+        raiz = metodoInsertar(raiz, patron, posiciones);
     }
     
     /*
@@ -135,47 +143,58 @@ public class ArbolBB {
      * @param posicion La posición asociada al patrón.
      * @return La nueva raíz del subárbol después de la inserción y/o balanceo.
      */
-    private NodoArbol metodoInsertar(NodoArbol aux, String patron, int posicion) {
-        if (esVacio()) {
-            raiz = aux; 
-        }
-        else {
-            int comparacion = patron.compareTo(aux.getPatron());
+    private NodoArbol metodoInsertar(NodoArbol aux, String patron,  ListaSimple<Integer> posiciones) {
+        if (aux==null) {
+            return new NodoArbol(patron, posiciones); 
+        }else{
+            
+            int freqPatron = posiciones.getTamaño();
+            int freqActual = aux.getFrecuencias(); //rev esto el tamaño del get frecuencias
+            
+            if (freqPatron < freqActual) {
+                aux.setHijoIzq(metodoInsertar(aux.getHijoIzq(), patron, posiciones));
+            } else if (freqPatron > freqActual) {
+                aux.setHijoDer(metodoInsertar(aux.getHijoDer(), patron, posiciones));
+            }else{
+                int comparacion = patron.compareTo(aux.getPatron());
 
-            if (comparacion < 0) {
-                metodoInsertar(raiz.getHijoIzq(), patron, posicion);
-            } else if (comparacion > 0) {
-                metodoInsertar(raiz.getHijoDer(), patron, posicion);
-            } else {
-                aux.insertarPosicion(posicion);
-                return aux;
+                if (comparacion < 0) {
+                    aux.setHijoIzq(metodoInsertar(aux.getHijoIzq(), patron, posiciones));
+                } else if (comparacion > 0) {
+                     aux.setHijoDer(metodoInsertar(aux.getHijoDer(), patron, posiciones));
+                } else {
+                    return aux;
+                }
             }
-        }
         
-        actualizarAltura(aux);
+            actualizarAltura(aux);
 
-        int balance = Balance(aux);
+            int balance = Balance(aux);
 
-        if (balance > 1 && patron.compareTo(aux.getHijoIzq().getPatron()) < 0) {
-            return rotarDerecha(aux);
-        }
+            if (balance > 1 && patron.compareTo(aux.getHijoIzq().getPatron()) < 0) {
+                return rotarDerecha(aux);
+            }
 
-        if (balance < -1 && patron.compareTo(aux.getHijoDer().getPatron()) > 0) {
-            return rotarIzquierda(aux);
-        }
+            if (balance < -1 && patron.compareTo(aux.getHijoDer().getPatron()) > 0) {
+                return rotarIzquierda(aux);
+            }
 
-        if (balance > 1 && patron.compareTo(aux.getHijoIzq().getPatron()) > 0) {
-            aux.setHijoIzq(rotarIzquierda(aux.getHijoIzq()));
-            return rotarDerecha(aux);
-        }
+            if (balance > 1 && patron.compareTo(aux.getHijoIzq().getPatron()) > 0) {
+                aux.setHijoIzq(rotarIzquierda(aux.getHijoIzq()));
+                return rotarDerecha(aux);
+            }
 
-        if (balance < -1 && patron.compareTo(aux.getHijoDer().getPatron()) < 0) {
-            aux.setHijoDer(rotarDerecha(aux.getHijoDer()));
-            return rotarIzquierda(aux);
-        }
+            if (balance < -1 && patron.compareTo(aux.getHijoDer().getPatron()) < 0) {
+                aux.setHijoDer(rotarDerecha(aux.getHijoDer()));
+                return rotarIzquierda(aux);
+            }
         
-        return aux;
+            return aux;
+            
+        }
     }
+    
+    
     
     
     /*
@@ -207,6 +226,29 @@ public class ArbolBB {
         }
     }
     
+    public NodoArbol buscarMayorFrecuencia() {
+        NodoArbol actual=raiz;
+        if (actual==null){
+            return null;
+        }else{
+            while (actual.getHijoDer()!=null) {
+                actual=actual.getHijoDer();
+            }
+            return actual;
+        }
+    }
+    
+    public NodoArbol buscarMenorFrecuencia() {
+        NodoArbol actual = raiz;
+        if (actual==null){
+            return null;
+        }else{
+            while (actual.getHijoIzq()!=null) {
+                actual=actual.getHijoIzq();
+            }
+            return actual;
+        }
+    }
     
     /*
      * Realiza un recorrido Inorden del árbol AVL.
@@ -230,8 +272,12 @@ public class ArbolBB {
      */
     private void inorden(NodoArbol nodo, ListaSimple<String> lista) {
         if (nodo != null) {
+ 
             inorden(nodo.getHijoIzq(), lista);
-            lista.insertarAlFinal(nodo.getPatron());
+            String patron = nodo.getPatron();
+            int frecuencia = nodo.getFrecuencias();
+            String listadoPosiciones = nodo.getPosiciones().mostrarListaPosiciones();
+            lista.insertarAlFinal(patron + " | Frecuencia: "+frecuencia+"\nUbicaciones: " + listadoPosiciones+"\n");
             inorden(nodo.getHijoDer(), lista);
         }
     }
