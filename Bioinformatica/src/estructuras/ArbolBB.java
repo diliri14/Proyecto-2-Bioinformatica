@@ -230,12 +230,12 @@ public class ArbolBB {
         NodoArbol actual=raiz;
         if (actual==null){
             return null;
-        }else{
-            while (actual.getHijoDer()!=null) {
-                actual=actual.getHijoDer();
-            }
-            return actual;
         }
+
+        while (actual.getHijoDer()!=null) {
+            actual=actual.getHijoDer();
+        }
+        return actual;
     }
     
     public NodoArbol buscarMenorFrecuencia() {

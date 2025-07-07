@@ -59,12 +59,14 @@ public class Interfaz1 extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        verInfoPatron1 = new javax.swing.JTextArea();
+        verInfoPatron = new javax.swing.JTextArea();
         jScrollPane4 = new javax.swing.JScrollPane();
         verListaPatrones = new javax.swing.JTextArea();
         jScrollPane5 = new javax.swing.JScrollPane();
-        verPatronMasFrecuente1 = new javax.swing.JTextArea();
+        verPatronMasFrecuente = new javax.swing.JTextArea();
         jLabel9 = new javax.swing.JLabel();
+        cargarComboPatrones = new javax.swing.JComboBox<>();
+        btnBuscarPatron = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -107,7 +109,7 @@ public class Interfaz1 extends javax.swing.JFrame {
         verPatronMenosFrecuente.setRows(5);
         jScrollPane2.setViewportView(verPatronMenosFrecuente);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 410, 260, 40));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 380, 260, 80));
 
         jLabel4.setFont(new java.awt.Font("Avenir", 0, 14)); // NOI18N
         jLabel4.setText("Presione el botón para mostrar todos los patrones encontrados");
@@ -116,7 +118,7 @@ public class Interfaz1 extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Avenir Next Condensed", 1, 14)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Patrón menos frecuente");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 380, 200, 17));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 350, 200, 17));
 
         reiniciar.setBackground(new java.awt.Color(255, 204, 153));
         reiniciar.setFont(new java.awt.Font("Avenir Next", 1, 13)); // NOI18N
@@ -136,19 +138,19 @@ public class Interfaz1 extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Avenir Next Condensed", 1, 14)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Búsqueda específica");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 510, 180, 17));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 490, 180, 20));
 
         jLabel7.setFont(new java.awt.Font("Avenir Next Condensed", 1, 14)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Patrón más frecuente");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 380, 140, 17));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 350, 170, 17));
 
-        verInfoPatron1.setBackground(new java.awt.Color(255, 224, 193));
-        verInfoPatron1.setColumns(20);
-        verInfoPatron1.setRows(5);
-        jScrollPane3.setViewportView(verInfoPatron1);
+        verInfoPatron.setBackground(new java.awt.Color(255, 224, 193));
+        verInfoPatron.setColumns(20);
+        verInfoPatron.setRows(5);
+        jScrollPane3.setViewportView(verInfoPatron);
 
-        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 550, 240, -1));
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 540, 240, 120));
 
         verListaPatrones.setBackground(new java.awt.Color(255, 224, 193));
         verListaPatrones.setColumns(20);
@@ -157,17 +159,33 @@ public class Interfaz1 extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 830, -1));
 
-        verPatronMasFrecuente1.setBackground(new java.awt.Color(255, 224, 193));
-        verPatronMasFrecuente1.setColumns(20);
-        verPatronMasFrecuente1.setRows(5);
-        jScrollPane5.setViewportView(verPatronMasFrecuente1);
+        verPatronMasFrecuente.setBackground(new java.awt.Color(255, 224, 193));
+        verPatronMasFrecuente.setColumns(20);
+        verPatronMasFrecuente.setRows(5);
+        jScrollPane5.setViewportView(verPatronMasFrecuente);
 
-        jPanel1.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, 260, 40));
+        jPanel1.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, 260, 80));
 
         jLabel9.setFont(new java.awt.Font("Avenir Next Condensed", 1, 14)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Búsqueda general de patrones");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 130, 180, 17));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 130, 220, 17));
+
+        cargarComboPatrones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cargarComboPatrones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cargarComboPatronesActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cargarComboPatrones, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 550, 150, 30));
+
+        btnBuscarPatron.setText("Buscar patrón");
+        btnBuscarPatron.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarPatronActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnBuscarPatron, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 610, 150, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 700));
 
@@ -186,10 +204,16 @@ public class Interfaz1 extends javax.swing.JFrame {
             verListaPatrones.setCaretPosition(0);
             
             NodoArbol patronMayor = arbol.buscarMayorFrecuencia();
-            verPatronMasFrecuente1.setText(patronMayor.getPatron());
+            if (patronMayor != null) {
+                String infoMayor = patronMayor.getPatron()+" | Frecuencia: "+patronMayor.getFrecuencias()+"\nUbicaciones: "+patronMayor.getPosiciones().mostrarListaPosiciones();
+                verPatronMasFrecuente.setText(infoMayor);
+            }
             
             NodoArbol patronMenor = arbol.buscarMenorFrecuencia();
-            verPatronMasFrecuente1.setText(patronMenor.getPatron());
+            if (patronMenor != null) {
+                String infoMenor = patronMenor.getPatron() + " | Frecuencia: " + patronMenor.getFrecuencias() +"\nUbicaciones: " + patronMenor.getPosiciones().mostrarListaPosiciones();
+            verPatronMenosFrecuente.setText(infoMenor);
+            }
             
         }catch (Exception e){
             JOptionPane.showMessageDialog(this, "Error al mostrar patrones: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -220,6 +244,17 @@ public class Interfaz1 extends javax.swing.JFrame {
                         procesador.construirTabla(tabla);
                         procesador.detectorSobrantes();
                         datosCargados=true;
+                        DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>) cargarComboPatrones.getModel();
+                        model.removeAllElements();
+
+                        ListaSimple<String> patrones = tabla.obtenerTodosPatronesOrdenados();
+                        NodoSimple<String> actual = patrones.getFirst();
+
+                        while (actual != null) {
+                            model.addElement(actual.getData());
+                            actual = actual.getNext();
+                        }
+                        
                         JOptionPane.showMessageDialog(this, "Datos cargados con éxito.","Carga de archivo",JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
@@ -235,7 +270,29 @@ public class Interfaz1 extends javax.swing.JFrame {
         tabla=new Hashtable();
         procesador=new ProcesadorArchivo();
         datosCargados=false;
+        verListaPatrones.setText("");
+        verPatronMasFrecuente.setText("");
+        verPatronMenosFrecuente.setText("");
+        verInfoPatron.setText("");
     }//GEN-LAST:event_reiniciarActionPerformed
+
+    private void cargarComboPatronesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarComboPatronesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cargarComboPatronesActionPerformed
+
+    private void btnBuscarPatronActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPatronActionPerformed
+        // TODO add your handling code here:
+        String patronSeleccionado = (String) cargarComboPatrones.getSelectedItem();
+        if (patronSeleccionado != null) {
+            NodoArbol nodo = tabla.buscar(patronSeleccionado);
+            if (nodo != null) {
+                String info = "Patrón: " + nodo.getPatron() + 
+                              "\nFrecuencia: " + nodo.getFrecuencias() + 
+                              "\nUbicaciones: " + nodo.getPosiciones().mostrarListaPosiciones();
+                verInfoPatron.setText(info);
+            }
+        }
+    }//GEN-LAST:event_btnBuscarPatronActionPerformed
 
     /**
      * @param args the command line arguments
@@ -273,7 +330,9 @@ public class Interfaz1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscarPatron;
     private javax.swing.JButton cargarArchivo;
+    private javax.swing.JComboBox<String> cargarComboPatrones;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -290,9 +349,9 @@ public class Interfaz1 extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JButton mostrarPatrones;
     private javax.swing.JButton reiniciar;
-    private javax.swing.JTextArea verInfoPatron1;
+    private javax.swing.JTextArea verInfoPatron;
     private javax.swing.JTextArea verListaPatrones;
-    private javax.swing.JTextArea verPatronMasFrecuente1;
+    private javax.swing.JTextArea verPatronMasFrecuente;
     private javax.swing.JTextArea verPatronMenosFrecuente;
     // End of variables declaration//GEN-END:variables
 }

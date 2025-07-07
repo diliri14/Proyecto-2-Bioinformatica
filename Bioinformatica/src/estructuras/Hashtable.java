@@ -130,4 +130,57 @@ public class Hashtable {
         }
         return patrones;
     }
+    
+    public ListaSimple<String> obtenerTodosPatronesOrdenados() {
+        ListaSimple<String> patrones = new ListaSimple<>();
+
+        for (int i = 0; i < tamaño; i++) {
+            ListaSimple<NodoArbol> cubo = tabla[i];
+            NodoSimple<NodoArbol> actual = cubo.getFirst();
+
+            while (actual != null) {
+                patrones.insertarAlFinal(actual.getData().getPatron());
+                actual = actual.getNext();
+            }
+        }
+
+        // Ordenar por primer carácter
+        return ordenarPorPrimerCaracter(patrones);
+    }
+
+    private ListaSimple<String> ordenarPorPrimerCaracter(ListaSimple<String> lista) {
+        if (lista.getFirst() == null || lista.getFirst().getNext() == null) {
+            return lista;
+        }
+
+        // Convertir a array para ordenar
+        int size = lista.getTamaño();
+        String[] array = new String[size];
+        NodoSimple<String> actual = lista.getFirst();
+
+        for (int i = 0; i < size; i++) {
+            array[i] = actual.getData();
+            actual = actual.getNext();
+        }
+
+        // Ordenar por primer carácter (burbuja simple)
+        for (int i = 0; i < size - 1; i++) {
+            for (int j = 0; j < size - i - 1; j++) {
+                if (array[j].charAt(0) > array[j + 1].charAt(0)) {
+                    String temp = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = temp;
+                }
+            }
+        }
+
+        // Reconstruir lista ordenada
+        ListaSimple<String> ordenada = new ListaSimple<>();
+        for (String s : array) {
+            ordenada.insertarAlFinal(s);
+        }
+
+        return ordenada;
+    }
+
 }
