@@ -67,6 +67,9 @@ public class Interfaz1 extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         cargarComboPatrones = new javax.swing.JComboBox<>();
         btnBuscarPatron = new javax.swing.JButton();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        verReporteColision = new javax.swing.JTextArea();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -99,7 +102,7 @@ public class Interfaz1 extends javax.swing.JFrame {
                 mostrarPatronesActionPerformed(evt);
             }
         });
-        jPanel1.add(mostrarPatrones, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 170, 140, -1));
+        jPanel1.add(mostrarPatrones, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 170, 140, -1));
 
         jSeparator2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 51, 0), 2));
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 830, 50));
@@ -109,16 +112,16 @@ public class Interfaz1 extends javax.swing.JFrame {
         verPatronMenosFrecuente.setRows(5);
         jScrollPane2.setViewportView(verPatronMenosFrecuente);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 380, 260, 80));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 380, 370, 80));
 
         jLabel4.setFont(new java.awt.Font("Avenir", 0, 14)); // NOI18N
         jLabel4.setText("Presione el botón para mostrar todos los patrones encontrados");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 170, -1, 17));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, -1, 17));
 
         jLabel5.setFont(new java.awt.Font("Avenir Next Condensed", 1, 14)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Patrón menos frecuente");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 350, 200, 17));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 360, 370, 17));
 
         reiniciar.setBackground(new java.awt.Color(255, 204, 153));
         reiniciar.setFont(new java.awt.Font("Avenir Next", 1, 13)); // NOI18N
@@ -128,43 +131,43 @@ public class Interfaz1 extends javax.swing.JFrame {
                 reiniciarActionPerformed(evt);
             }
         });
-        jPanel1.add(reiniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 650, 140, -1));
+        jPanel1.add(reiniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 720, 140, -1));
 
         jLabel6.setFont(new java.awt.Font("Avenir Next Condensed", 1, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Lista de patrones ");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 210, 140, 17));
+        jLabel6.setText("Lista de patrones encontrados en la secuencia ");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 830, 17));
 
         jLabel8.setFont(new java.awt.Font("Avenir Next Condensed", 1, 14)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("Búsqueda específica");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 490, 180, 20));
+        jLabel8.setText("Reporte de colisiones ");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 480, 180, 20));
 
         jLabel7.setFont(new java.awt.Font("Avenir Next Condensed", 1, 14)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Patrón más frecuente");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 350, 170, 17));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 370, 17));
 
         verInfoPatron.setBackground(new java.awt.Color(255, 224, 193));
         verInfoPatron.setColumns(20);
         verInfoPatron.setRows(5);
         jScrollPane3.setViewportView(verInfoPatron);
 
-        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 540, 240, 120));
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 620, 240, 120));
 
         verListaPatrones.setBackground(new java.awt.Color(255, 224, 193));
         verListaPatrones.setColumns(20);
         verListaPatrones.setRows(5);
         jScrollPane4.setViewportView(verListaPatrones);
 
-        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 830, -1));
+        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 830, 100));
 
         verPatronMasFrecuente.setBackground(new java.awt.Color(255, 224, 193));
         verPatronMasFrecuente.setColumns(20);
         verPatronMasFrecuente.setRows(5);
         jScrollPane5.setViewportView(verPatronMasFrecuente);
 
-        jPanel1.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, 260, 80));
+        jPanel1.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, 370, 80));
 
         jLabel9.setFont(new java.awt.Font("Avenir Next Condensed", 1, 14)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -177,7 +180,7 @@ public class Interfaz1 extends javax.swing.JFrame {
                 cargarComboPatronesActionPerformed(evt);
             }
         });
-        jPanel1.add(cargarComboPatrones, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 550, 150, 30));
+        jPanel1.add(cargarComboPatrones, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 630, 150, 30));
 
         btnBuscarPatron.setText("Buscar patrón");
         btnBuscarPatron.addActionListener(new java.awt.event.ActionListener() {
@@ -185,9 +188,21 @@ public class Interfaz1 extends javax.swing.JFrame {
                 btnBuscarPatronActionPerformed(evt);
             }
         });
-        jPanel1.add(btnBuscarPatron, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 610, 150, 30));
+        jPanel1.add(btnBuscarPatron, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 700, 150, 30));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 700));
+        verReporteColision.setBackground(new java.awt.Color(255, 224, 193));
+        verReporteColision.setColumns(20);
+        verReporteColision.setRows(5);
+        jScrollPane6.setViewportView(verReporteColision);
+
+        jPanel1.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 500, 830, 50));
+
+        jLabel10.setFont(new java.awt.Font("Avenir Next Condensed", 1, 14)); // NOI18N
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setText("Búsqueda específica");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 590, 180, 20));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 780));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -214,6 +229,8 @@ public class Interfaz1 extends javax.swing.JFrame {
                 String infoMenor = patronMenor.getPatron() + " | Frecuencia: " + patronMenor.getFrecuencias() +"\nUbicaciones: " + patronMenor.getPosiciones().mostrarListaPosiciones();
             verPatronMenosFrecuente.setText(infoMenor);
             }
+            
+            verReporteColision.setText(tabla.reporteColisiones());
             
         }catch (Exception e){
             JOptionPane.showMessageDialog(this, "Error al mostrar patrones: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -334,6 +351,7 @@ public class Interfaz1 extends javax.swing.JFrame {
     private javax.swing.JButton cargarArchivo;
     private javax.swing.JComboBox<String> cargarComboPatrones;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -346,6 +364,7 @@ public class Interfaz1 extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JButton mostrarPatrones;
     private javax.swing.JButton reiniciar;
@@ -353,5 +372,6 @@ public class Interfaz1 extends javax.swing.JFrame {
     private javax.swing.JTextArea verListaPatrones;
     private javax.swing.JTextArea verPatronMasFrecuente;
     private javax.swing.JTextArea verPatronMenosFrecuente;
+    private javax.swing.JTextArea verReporteColision;
     // End of variables declaration//GEN-END:variables
 }

@@ -15,7 +15,7 @@ public class Hashtable {
     
     private static final int tamaño = 64; // Tamaño fijo de la hashtable. Optimizado, 3 caracteres con 4 posibiles nucleótidos (4^3=64)
     private ListaSimple<NodoArbol>[] tabla; // Arreglo que representa los cubos del hashtable.
-
+    private ListaSimple<String> listaColisiones;
     /*
      * Constructor de la clase Hashtable.
      * Inicializa el arreglo de ListaSimple y crea una nueva ListaSimple vacía para cada cubo de la tabla.
@@ -25,6 +25,7 @@ public class Hashtable {
         for (int i = 0; i < tamaño; i++) {
             tabla[i] = new ListaSimple<>();
         }
+        listaColisiones = new ListaSimple<>();
     }
 
     /*
@@ -65,14 +66,7 @@ public class Hashtable {
         return indice;
     }
 
-    /*
-     * Inserta un patrón de ARN y su posición en la hashtable.
-     * Si el patrón ya existe en el cubo correspondiente, se añade la nueva posición a la lista.
-     * Si no existe, se crea un nuevo NodoArbol y se añade a la lista del cubo.
-     *
-     * @param patron El patrón de ARN (String) a insertar.
-     * @param posicion La posición (Integer) donde se encontró el patrón en la secuencia principal de ADN.
-     */
+    
     public void insertar(String patron, int posicion) {
         int indice = calcularIndice(patron);
         ListaSimple<NodoArbol> cubo = tabla[indice];
@@ -181,6 +175,28 @@ public class Hashtable {
         }
 
         return ordenada;
+    }
+    
+    public String reporteColisiones(){
+        for (int i = 0; i < tamaño; i++) {
+            ListaSimple<NodoArbol> cubo = tabla[i];
+            if (cubo.getTamaño() > 1) {
+                String cadena="Colisión en cubo N. " + i + ": ";
+                NodoSimple<NodoArbol> aux = cubo.getFirst();
+                while (aux!=null) {
+                    cadena+=aux.getData().getPatron();
+                    if (aux.getNext()!=null) {
+                        cadena+= ", ";
+                    }
+                    aux = aux.getNext();
+                }
+                listaColisiones.insertarAlFinal(cadena);
+            }
+        }
+        if (listaColisiones.esVacia()){
+            return "No se generaron colisiones.";
+        }
+        return listaColisiones.mostrarLista();
     }
 
 }
