@@ -9,7 +9,7 @@ package estructuras;
  * Utiliza una estrategia de encadenamiento para resolver colisiones, donde cada "cubo" (bucket) de la tabla es una ListaSimple de nodos NodoArbol.
  * La clave hash se genera a partir de patrones de ARN de 3 caracteres (tripleta), asignando cada nucleótido (A, C, G, U) a un valor numérico para crear un índice.
  * 
- * @author Diego Linares
+ * @author Diego Linares, Peña
  */
 public class Hashtable {
     
@@ -199,4 +199,5 @@ public class Hashtable {
         return listaColisiones.mostrarLista();
     }
 
+    
 }
