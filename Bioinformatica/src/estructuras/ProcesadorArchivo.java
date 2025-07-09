@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Luis Lovera
+ * @author Luis Lovera, Peña
  */
 public class ProcesadorArchivo {
     private String secuenciaADN;
@@ -71,6 +71,71 @@ public class ProcesadorArchivo {
             arbol.insertar(patron, posiciones);
             aux=aux.getNext();
         }
+    }
+    
+    public ListaSimple<String> generarReporteAminoacidos(Hashtable tabla) {
+        ListaSimple<String> reporte = new ListaSimple<>();
+        int totalSTOP = 0;
+        int totalInicio = 0;
+        int totalInvalidos = 0;
+
+        // Mapa personalizado para aminoácidos
+        ListaSimple<AminoAcidoInfo> aminoAcidosList = new ListaSimple<>();
+
+        // Recorrer todos los patrones
+        ListaSimple<NodoArbol> patrones = tabla.obtenerPatrones();
+        NodoSimple<NodoArbol> actual = patrones.getFirst();
+
+        while (actual != null) {
+            String tripleta = actual.getData().getPatron();
+            String aminoacido = TraductorAminoacidos.traducir(tripleta);
+            int frecuencia = actual.getData().getFrecuencias();
+
+            // Contar tipos especiales
+            if (aminoacido.startsWith("STOP")) totalSTOP += frecuencia;
+            else if (aminoacido.contains("Inicio")) totalInicio += frecuencia;
+            else if (aminoacido.equals("Tripleta inválida")) totalInvalidos += frecuencia;
+
+            // Buscar aminoácido en la lista
+            AminoAcidoInfo info = buscarAminoAcidoInfo(aminoAcidosList, aminoacido);
+
+            if (info == null) {
+                info = new AminoAcidoInfo(aminoacido);
+                aminoAcidosList.insertarAlFinal(info);
+            }
+
+            info.agregarTripleta(tripleta, frecuencia);
+            actual = actual.getNext();
+        }
+
+        // Generar reporte principal
+        NodoSimple<AminoAcidoInfo> aminoActual = aminoAcidosList.getFirst();
+        while (aminoActual != null) {
+            AminoAcidoInfo info = aminoActual.getData();
+            if (!info.nombre.startsWith("STOP") && !info.nombre.contains("Inicio")) {
+                reporte.insertarAlFinal(info.generarLineaReporte());
+            }
+            aminoActual = aminoActual.getNext();
+        }
+
+        // Agregar sección especial
+        reporte.insertarAlFinal("\n--- TRIPLETAS ESPECIALES ---");
+        reporte.insertarAlFinal("Metionina (Inicio): " + totalInicio + " ocurrencias");
+        reporte.insertarAlFinal("STOP (Total): " + totalSTOP + " ocurrencias");
+        reporte.insertarAlFinal("Tripletas inválidas: " + totalInvalidos + " ocurrencias");
+
+        return reporte;
+    }
+    
+    private AminoAcidoInfo buscarAminoAcidoInfo(ListaSimple<AminoAcidoInfo> lista, String nombre) {
+        NodoSimple<AminoAcidoInfo> actual = lista.getFirst();
+        while (actual != null) {
+            if (actual.getData().nombre.equals(nombre)) {
+                return actual.getData();
+            }
+            actual = actual.getNext();
+        }
+        return null;
     }
     
     public String getSecuenciaADN() {

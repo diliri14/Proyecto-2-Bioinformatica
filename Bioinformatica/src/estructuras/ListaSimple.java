@@ -78,6 +78,19 @@ public class ListaSimple<T> {
         return cadena;
     } 
     
+    public String mostrarLista(String separador) {
+        String cadena = "";
+        NodoSimple<T> aux = first;
+        while (aux != null) {
+            cadena = cadena + aux.getData();
+            if (aux.getNext() != null) {
+                cadena = cadena + separador;
+            }
+            aux = aux.getNext();
+        }
+        return cadena;
+    }
+    
     public String mostrarListaPosiciones(){
         String cadena="";
         NodoSimple aux=first;
