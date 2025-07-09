@@ -181,6 +181,9 @@ public class ProcesadorArchivo {
         return null;
     }
     
+    /**
+    * Getter
+    */
     public String getSecuenciaADN() {
         return secuenciaADN;
     }

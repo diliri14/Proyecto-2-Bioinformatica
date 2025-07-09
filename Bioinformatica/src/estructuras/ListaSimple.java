@@ -4,7 +4,7 @@
  */
 package estructuras;
 
- /*
+ /**
  * Implementación de una lista simplemente enlazada genérica.
  * Permite operaciones básicas como inserción al final, verificación de vacío,
  * vaciado de lista y representación en cadena de caracteres.
@@ -17,7 +17,7 @@ public class ListaSimple<T> {
     private NodoSimple last;
     private int tamaño;
     
-    /*
+    /**
      * Constructor que inicializa una lista vacía.
      */
     public ListaSimple() {
@@ -26,7 +26,7 @@ public class ListaSimple<T> {
         this.tamaño = 0;
     }
     
-    /*
+    /**
      * Verifica si la lista está vacía.
      * 
      * @return true si la lista no contiene elementos, false en caso contrario
@@ -35,7 +35,7 @@ public class ListaSimple<T> {
         return first == null;
     }
     
-    /*
+    /**
      * Vacía la lista, eliminando todos sus elementos.
      */
     public void vaciar(){
@@ -44,7 +44,7 @@ public class ListaSimple<T> {
         tamaño=0;
     }
     
-    /*
+    /**
      * Inserta un nuevo elemento al final de la lista.
      * 
      * @param newDato Elemento a insertar
@@ -61,7 +61,7 @@ public class ListaSimple<T> {
         tamaño++;        
     }
     
-    /*
+    /**
      * Genera una representación en cadena de todos los elementos de la lista.
      * Cada elemento se muestra en una línea separada.
      * 
@@ -78,7 +78,7 @@ public class ListaSimple<T> {
         return cadena;
     } 
     
-    /*
+    /**
      * Muestra la lista usando un separador personalizado entre los elementos.
      *
      * @param separador Cadena que se usa para separar los elementos.
@@ -97,7 +97,7 @@ public class ListaSimple<T> {
         return cadena;
     }
     
-    /*
+    /**
      * Muestra la lista de posiciones en formato visual, separando por comas y
      * agregando saltos de línea cada 22 posiciones para mejor legibilidad.
      *
@@ -123,7 +123,7 @@ public class ListaSimple<T> {
         return cadena;
     }
     
-    /*
+    /**
      * Muestra patrones y frecuencias en formato de reporte.
      * Cada nodo debe ser de tipo NodoArbol.
      *
@@ -155,7 +155,7 @@ public class ListaSimple<T> {
         return cadena;
     }
     
-    /*
+    /**
     * Verifica si un elemento específico existe en la lista.
     * La comparación se realiza usando el método equals() del elemento.
     * 
@@ -175,7 +175,7 @@ public class ListaSimple<T> {
     }   
 
 
-    /*
+    /**
     * Getters y setters
     */
     public NodoSimple getFirst() {

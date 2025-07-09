@@ -4,7 +4,7 @@
  */
 package estructuras;
 
-/*
+/**
  * Implementación de un nodo para listas enlazadas simples.
  * Cada nodo contiene un dato genérico y una referencia al siguiente nodo en la secuencia
  *
@@ -17,7 +17,7 @@ public class NodoSimple<T> {
     private NodoSimple<T> next;
     
     
-    /*
+    /**
      * Constructor que crea un nuevo nodo con el dato especificado
      * El siguiente nodo es por defecto null.
      *
@@ -28,7 +28,7 @@ public class NodoSimple<T> {
         this.next = null;
     }
 
-    /*
+    /**
     * Getters y setters
     */
     public T getData() {

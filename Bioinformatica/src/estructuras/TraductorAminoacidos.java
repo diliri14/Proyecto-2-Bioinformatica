@@ -9,7 +9,7 @@ package estructuras;
  * Usa una tabla estática para hacer la traducción rápida.
  * Ejemplo de uso: TraductorAminoacidos.traducir("ATG") devuelve "Metionina (Inicio)".
  *
- * @author Peña
+ * @author Luis Peña
  */
 public class TraductorAminoacidos {
     // Tabla de traducción: índice = (base1*16) + (base2*4) + base3

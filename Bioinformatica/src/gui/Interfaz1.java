@@ -276,6 +276,7 @@ public class Interfaz1 extends javax.swing.JFrame {
                               "\nFrecuencia: " + nodo.getFrecuencias() + 
                               "\nUbicaciones: " + nodo.getPosiciones().mostrarListaPosiciones();
                 verInfoPatron.setText(info);
+                verInfoPatron.setCaretPosition(0);
             }
             
             

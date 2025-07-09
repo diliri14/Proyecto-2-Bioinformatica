@@ -6,8 +6,10 @@ package main;
 import gui.Interfaz1;
 
 /**
- *
- * @author Linares, Lovera, Peña
+ * Clase principal del proyecto de bioinformática.
+ * Inicia la interfaz gráfica del sistema.
+ * 
+ * @author Diego Linares, Luis Mariano Lovera, Luis Peña
  */
 public class Bioinformatica {
 

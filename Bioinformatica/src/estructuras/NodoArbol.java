@@ -4,7 +4,7 @@
  */
 package estructuras;
 
-/*
+/**
  * Implementación de un nodo para el Árbol Binario de Búsqueda.
  * Cada nodo contiene un patrón de ADN (dato) y referencias a sus hijos izquierdo y derecho.
  * Además, almacena una lista de posiciones donde el patrón se encuentra en la secuencia principal de ADN.
@@ -19,11 +19,11 @@ public class NodoArbol {
     private NodoArbol hijoDer;
     private int altura;
 
-    /*
-     * Constructor para crear un nuevo nodo.
-     * @param patron El patrón (secuencia de 3 caracteres de ADN) de este nodo.
-     * @param posicion La primera posición (índice) donde se encontró este patrón.
-     */
+    /**
+    * Constructor para crear un nuevo nodo.
+    * @param patron El patrón (secuencia de 3 caracteres de ADN) de este nodo.
+    * @param posiciones Lista de todas las posiciones (índices) donde se encontró este patrón en la secuencia principal.
+    */
     public NodoArbol(String patron, ListaSimple<Integer> posiciones) {
         this.patron = patron;
         this.posiciones=posiciones;
@@ -32,7 +32,7 @@ public class NodoArbol {
         this.altura = 1;
     }
 
-    /*
+    /**
     * Getters y setters
     */
     public String getPatron() {

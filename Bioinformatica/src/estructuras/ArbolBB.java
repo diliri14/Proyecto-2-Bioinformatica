@@ -5,32 +5,39 @@ package estructuras;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
-/*
+/**
  * Implementación de un Árbol Binario de Búsqueda que se auto-balancea, es decir un Árbol AVL.
- * Almacena patrones de ADN (Strings) como claves y una lista de posiciones (ListaSimple<Integer>) donde cada patrón aparece en la secuencia principal de ADN.
+ * El árbol almacena, en cada nodo, un patrón de ADN (String) junto a una lista de posiciones (ListaSimple<Integer>) 
+ * donde ese patrón aparece en la secuencia principal.
+ * 
+ * El criterio de orden del árbol es la frecuencia (cantidad de posiciones) del patrón. 
+ * En caso de empate de frecuencias, el patrón se compara alfabéticamente.
+ *
+ * Proporciona métodos para insertar patrones, buscar patrones con mayor o menor frecuencia,
+ * y recorrer el árbol en orden (inorden), entre otros.
  *
  * @author Diego Linares, Luis Mariano Lovera
  */
 public class ArbolBB {
     private NodoArbol raiz;
     
-    /*
+    /**
      * Constructor que inicializa un árbol vacío.
      */
     public ArbolBB() {
         this.raiz = null;
     }
     
-    /*
+    /**
      * Verifica si el árbol está vacío.
      * 
      * @return true si el árbol no contiene raíz, false en caso contrario
      */
-    public Boolean esVacio() {
+    public boolean esVacio() {
         return raiz == null;
     }
     
-    /*
+    /**
      * Obtiene la altura de un nodo específico.
      * Si es nulo se considera como 0.
      *
@@ -46,7 +53,7 @@ public class ArbolBB {
         }
     }
     
-    /*
+    /**
      * Actualiza la altura de un nodo basándose en la altura de sus hijos.
      * Esto con el objetivo de mantener el árbol con estructura AVL.
      * Llamado después de que se cambie la estrucutra del árbol a través de inserciones o rotaciones. 
@@ -59,11 +66,11 @@ public class ArbolBB {
         }
     }
     
-    /*
+    /**
      * Calcula la diferencia entre la altura de ambos hijos de un nodo.
      * Un nodo está balanceado si Balance() se encuentra entre -1 y 1.
      *
-     * @param El nodo de cual se desea conocer su balance.
+     * @param nodo El nodo de cual se desea conocer su balance.
      * @return el factor de balanceo del nodo (entero).
      */
     private int Balance(NodoArbol nodo) {
@@ -73,7 +80,7 @@ public class ArbolBB {
         return altura(nodo.getHijoIzq()) - altura(nodo.getHijoDer());
     }
     
-    /*
+    /**
      * Realiza una rotación simple a la derecha.
      * Esta rotación se aplica cuando hay un desbalance en el subárbol izquierdo del hijo izquierdo (caso LL).
      * El nodo 'y' es la raíz del subárbol desbalanceado.
@@ -98,7 +105,7 @@ public class ArbolBB {
         return x;
     }
 
-    /*
+    /**
      * Realiza una rotación simple a la izquierda.
      * Esta rotación se aplica cuando hay un desbalance en el subárbol derecho del hijo derecho (caso RR).
      * El nodo 'x' es la raíz del subárbol desbalanceado.
@@ -123,39 +130,39 @@ public class ArbolBB {
         return y;
     }
     
-    /*
-     * Inserta un patrón de ADN y su posición en el árbol AVL.
-     * Se realiza de forma recursiva y el árbol se auto-balancea
-     *
-     * @param patron El patrón de ADN (String) a insertar.
-     * @param posicion La posición (Integer) asociada al patrón en la secuencia principal.
+    /**
+     * Inserta un patrón de ADN y su lista de posiciones en el árbol AVL.
+     * El árbol se auto-balancea después de la inserción.
+     * @param patron El patrón de ADN a insertar.
+     * @param posiciones La lista de posiciones asociadas al patrón en la secuencia principal.
      */
     public void insertar(String patron, ListaSimple<Integer> posiciones) {
         raiz = metodoInsertar(raiz, patron, posiciones);
     }
     
-    /*
-     * Método auxiliar recursivo para insertar un patrón en el árbol AVL.
-     * También actualiza alturas y crea rotaciones para mantener el balanceo AVL.
-     *
-     * @param aux El nodo actual en el subárbol que se está procesando en la recursión.
-     * @param patron El patrón de ADN a insertar.
-     * @param posicion La posición asociada al patrón.
-     * @return La nueva raíz del subárbol después de la inserción y/o balanceo.
-     */
+    /**
+    * Método auxiliar recursivo para insertar un patrón y su lista de posiciones en el árbol AVL.
+    * También actualiza alturas y realiza rotaciones para mantener el balanceo AVL.
+    * @param aux El nodo actual en el subárbol.
+    * @param patron El patrón de ADN a insertar.
+    * @param posiciones La lista de posiciones asociadas al patrón.
+    * @return La nueva raíz del subárbol después de la inserción/balanceo.
+    */
     private NodoArbol metodoInsertar(NodoArbol aux, String patron,  ListaSimple<Integer> posiciones) {
         if (aux==null) {
             return new NodoArbol(patron, posiciones); 
         }else{
             
             int freqPatron = posiciones.getTamaño();
-            int freqActual = aux.getFrecuencias(); //rev esto el tamaño del get frecuencias
+            int freqActual = aux.getFrecuencias(); 
             
             if (freqPatron < freqActual) {
                 aux.setHijoIzq(metodoInsertar(aux.getHijoIzq(), patron, posiciones));
             } else if (freqPatron > freqActual) {
                 aux.setHijoDer(metodoInsertar(aux.getHijoDer(), patron, posiciones));
             }else{
+                
+                //Si la frecuencia es igual, se compara alfabéticamente el patrón
                 int comparacion = patron.compareTo(aux.getPatron());
 
                 if (comparacion < 0) {
@@ -194,7 +201,7 @@ public class ArbolBB {
         }
     }
       
-    /*
+    /**
      * Busca y retorna el nodo con la mayor frecuencia (más a la derecha).
      * @return NodoArbol con mayor frecuencia, o null si el árbol está vacío.
      */
@@ -210,7 +217,7 @@ public class ArbolBB {
         return actual;
     }
 
-    /*
+    /**
      * Busca y retorna el nodo con la menor frecuencia (más a la izquierda).
      * @return NodoArbol con menor frecuencia, o null si el árbol está vacío.
      */
@@ -226,7 +233,7 @@ public class ArbolBB {
         return actual;
     }
     
-    /*
+    /**
      * Devuelve una lista con todos los patrones de mayor frecuencia.
      * @return ListaSimple con los nodos de mayor frecuencia.
      */
@@ -240,7 +247,7 @@ public class ArbolBB {
         return listaMayorFrec;
     }
 
-    /*
+    /**
      * Devuelve una lista con todos los patrones de menor frecuencia.
      * @return ListaSimple con los nodos de menor frecuencia.
      */
@@ -254,7 +261,7 @@ public class ArbolBB {
         return listaMenorFrec;
     }   
     
-    /*
+    /**
      * Recolecta en una lista todos los nodos cuya frecuencia coincide con la buscada.
      * @param nodo Nodo actual del árbol.
      * @param frecuenciaObjetivo Frecuencia a buscar.
@@ -281,7 +288,7 @@ public class ArbolBB {
         }
     }
     
-    /*
+    /**
      * Realiza un recorrido Inorden del árbol AVL.
      * Los elementos se visitan en orden: hijo izquierdo, nodo actual, hijo derecho.
      * Esto resulta en una lista de patrones ordenados alfabéticamente.
@@ -294,7 +301,7 @@ public class ArbolBB {
         return orden;
     }
     
-    /*
+    /**
      * Método auxiliar recursivo para realizar el recorrido Inorden.
      * Este método acumula los patrones en la lista proporcionada.
      *
