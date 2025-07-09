@@ -6,7 +6,7 @@ Esta aplicación Java procesa secuencias genéticas para identificar patrones de
 
 ## Integrantes  
 1. Luis Peña 
-2. Luis Lovera
+2. Luis Mariano Lovera
 3. Diego Linares 
 
 ## Repositorio  
