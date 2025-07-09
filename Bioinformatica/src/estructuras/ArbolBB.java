@@ -193,39 +193,7 @@ public class ArbolBB {
             
         }
     }
-    
-    
-    
-    
-    /*
-     * Busca un patrón de ADN específico en el árbol AVL.
-     *
-     * @param patron El patrón de ADN (String) a buscar.
-     * @return El NodoArbol que contiene el patrón y sus posiciones, o null si el patrón no se encuentra.
-     */
-    public NodoArbol buscar(String patron) {
-        return metodoBuscar(raiz, patron);
-    }
-    
-    /*
-     * Método auxiliar recursivo para buscar un patrón en el árbol.
-     *
-     * @param aux El nodo actual en el subárbol que se está procesando en la recursión.
-     * @param patron El patrón de ADN a buscar.
-     * @return El NodoArbol que contiene el patrón, o null si no se encuentra.
-     */
-    private NodoArbol metodoBuscar(NodoArbol aux, String patron) {
-        if (aux == null || aux.getPatron().equals(patron)) {
-            return aux;
-        }
-
-        if (patron.compareTo(aux.getPatron()) < 0) {
-            return metodoBuscar(aux.getHijoIzq(), patron);
-        } else {
-            return metodoBuscar(aux.getHijoDer(), patron);
-        }
-    }
-    
+      
     public NodoArbol buscarNodoMayorFrecuencia(){
         NodoArbol actual=raiz;
         if (actual==null){
@@ -323,58 +291,5 @@ public class ArbolBB {
         }
     }
     
-    /*
-     * Realiza un recorrido Preorden del árbol AVL.
-     * Los elementos se visitan en orden: nodo actual, hijo izquierdo, hijo derecho.
-     *
-     * @return Una ListaSimple de Strings con los patrones en orden inorden.
-     */
-    public ListaSimple<String> preorden() {
-        ListaSimple<String> orden = new ListaSimple<>();
-        preorden(raiz, orden); // Llama al método recursivo auxiliar
-        return orden;
-    }
-    
-    /*
-     * Método auxiliar recursivo para realizar el recorrido Preorden.
-     * Este método acumula los patrones en la lista proporcionada.
-     *
-     * @param nodo El nodo actual en el subárbol que se está procesando en la recursión.
-     * @param lista La lista donde se acumularán los patrones visitados.
-     */
-    private void preorden(NodoArbol nodo, ListaSimple<String> lista) {
-        if (nodo != null) {
-            lista.insertarAlFinal(nodo.getPatron());
-            preorden(nodo.getHijoIzq(), lista);
-            preorden(nodo.getHijoDer(), lista);
-        }
-    }
-    
-    /*
-     * Realiza un recorrido Preorden del árbol AVL.
-     * Los elementos se visitan en orden: hijo izquierdo, hijo derecho, nodo actual.
-     *
-     * @return Una ListaSimple de Strings con los patrones en orden inorden.
-     */
-    public ListaSimple<String> postorden() {
-        ListaSimple<String> orden = new ListaSimple<>();
-        postorden(raiz, orden); // Llama al método recursivo auxiliar
-        return orden;
-    }
-    
-    /*
-     * Método auxiliar recursivo para realizar el recorrido Postorden.
-     * Este método acumula los patrones en la lista proporcionada.
-     *
-     * @param nodo El nodo actual en el subárbol que se está procesando en la recursión.
-     * @param lista La lista donde se acumularán los patrones visitados.
-     */
-    private void postorden(NodoArbol nodo, ListaSimple<String> lista) {
-        if (nodo != null) {
-            postorden(nodo.getHijoIzq(), lista);
-            postorden(nodo.getHijoDer(), lista);
-            lista.insertarAlFinal(nodo.getPatron());
-        }
-    }
 }
 

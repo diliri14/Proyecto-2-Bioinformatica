@@ -15,6 +15,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
 
 /**
+ * Ventana principal del sistema de análisis y visualización de secuencias de ADN.
+ * Permite al usuario cargar archivos, consultar patrones, ver reportes y reiniciar el sistema.
+ * Se conecta con las clases de lógica (tabla hash, árbol AVL, lista) y muestra los resultados en la interfaz gráfica.
  *
  * @author Linares, Peña, Lovera
  */
@@ -254,6 +257,10 @@ public class Interfaz1 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Acción al presionar el botón "Buscar".
+     * Busca la información del patrón seleccionado en el combo box y la muestra.
+     */
     private void btnBuscarPatronesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPatronesActionPerformed
         // TODO add your handling code here:
         try{
@@ -279,6 +286,10 @@ public class Interfaz1 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnBuscarPatronesActionPerformed
 
+    /**
+     * Acción al presionar el botón "Cargar archivo".
+     * Permite al usuario seleccionar un archivo de texto y cargar la secuencia de ADN.
+     */
     private void cargarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarArchivoActionPerformed
         // TODO add your handling code here:
         try{
@@ -323,6 +334,10 @@ public class Interfaz1 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cargarArchivoActionPerformed
 
+    /**
+     * Acción al presionar el botón "Reiniciar".
+     * Limpia la interfaz y vuelve a crear todas las estructuras para cargar nuevos datos.
+     */
     private void reiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reiniciarActionPerformed
         // TODO add your handling code here:
         tabla=new Hashtable();
@@ -342,6 +357,10 @@ public class Interfaz1 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cargarComboPatronesActionPerformed
 
+    /**
+     * Acción al presionar el botón "Mostrar información".
+     * Llena todos los reportes y áreas de texto de la interfaz con los datos actuales.
+     */
     private void mostrarPatronesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarPatronesActionPerformed
         // TODO add your handling code here:
         try{
