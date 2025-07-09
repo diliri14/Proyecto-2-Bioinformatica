@@ -6,8 +6,8 @@ Esta aplicación Java procesa secuencias genéticas para identificar patrones de
 
 ## Integrantes  
 1. Luis Peña 
-2. Luis Lovera
+2. Luis Mariano Lovera
 3. Diego Linares 
 
 ## Repositorio  
-🔗 https://github.com/usuario/proyecto-bioinformatica  
+🔗 https://github.com/diliri14/Proyecto-2-Bioinformatica
