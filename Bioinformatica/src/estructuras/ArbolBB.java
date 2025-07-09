@@ -9,7 +9,7 @@ package estructuras;
  * Implementación de un Árbol Binario de Búsqueda que se auto-balancea, es decir un Árbol AVL.
  * Almacena patrones de ADN (Strings) como claves y una lista de posiciones (ListaSimple<Integer>) donde cada patrón aparece en la secuencia principal de ADN.
  *
- * @author Diego Linares, Lovera
+ * @author Diego Linares, Luis Mariano Lovera
  */
 public class ArbolBB {
     private NodoArbol raiz;
@@ -194,6 +194,10 @@ public class ArbolBB {
         }
     }
       
+    /*
+     * Busca y retorna el nodo con la mayor frecuencia (más a la derecha).
+     * @return NodoArbol con mayor frecuencia, o null si el árbol está vacío.
+     */
     public NodoArbol buscarNodoMayorFrecuencia(){
         NodoArbol actual=raiz;
         if (actual==null){
@@ -206,6 +210,10 @@ public class ArbolBB {
         return actual;
     }
 
+    /*
+     * Busca y retorna el nodo con la menor frecuencia (más a la izquierda).
+     * @return NodoArbol con menor frecuencia, o null si el árbol está vacío.
+     */
     public NodoArbol buscarNodoMenorFrecuencia(){
     NodoArbol actual=raiz;
         if (actual==null){
@@ -217,7 +225,11 @@ public class ArbolBB {
         }
         return actual;
     }
-
+    
+    /*
+     * Devuelve una lista con todos los patrones de mayor frecuencia.
+     * @return ListaSimple con los nodos de mayor frecuencia.
+     */
     public ListaSimple<NodoArbol> buscarMayorFrecuencia() {
         ListaSimple<NodoArbol> listaMayorFrec = new ListaSimple<>();
         NodoArbol nodoMax = buscarNodoMayorFrecuencia();
@@ -228,6 +240,10 @@ public class ArbolBB {
         return listaMayorFrec;
     }
 
+    /*
+     * Devuelve una lista con todos los patrones de menor frecuencia.
+     * @return ListaSimple con los nodos de menor frecuencia.
+     */
     public ListaSimple<NodoArbol> buscarMenorFrecuencia() {
         ListaSimple<NodoArbol> listaMenorFrec = new ListaSimple<>();
         NodoArbol nodoMin = buscarNodoMenorFrecuencia();
@@ -238,6 +254,12 @@ public class ArbolBB {
         return listaMenorFrec;
     }   
     
+    /*
+     * Recolecta en una lista todos los nodos cuya frecuencia coincide con la buscada.
+     * @param nodo Nodo actual del árbol.
+     * @param frecuenciaObjetivo Frecuencia a buscar.
+     * @param lista Lista donde se agregan los nodos encontrados.
+     */
     public void recolectarPorFrecuencia(NodoArbol nodo, int frecuenciaObjetivo, ListaSimple<NodoArbol> lista){
         if (nodo==null){
             return;

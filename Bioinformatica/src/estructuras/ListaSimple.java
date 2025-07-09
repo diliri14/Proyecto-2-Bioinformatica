@@ -10,7 +10,7 @@ package estructuras;
  * vaciado de lista y representación en cadena de caracteres.
  * 
  * @param <T> Tipo genérico de los elementos almacenados en la lista
- * @author Luis Peña y Diego Linares
+ * @author Luis Peña, Diego Linares, Luis Mariano Lovera
  */
 public class ListaSimple<T> {
     private NodoSimple first;
@@ -78,6 +78,12 @@ public class ListaSimple<T> {
         return cadena;
     } 
     
+    /*
+     * Muestra la lista usando un separador personalizado entre los elementos.
+     *
+     * @param separador Cadena que se usa para separar los elementos.
+     * @return Cadena con los elementos separados según el separador dado.
+     */
     public String mostrarLista(String separador) {
         String cadena = "";
         NodoSimple<T> aux = first;
@@ -91,6 +97,12 @@ public class ListaSimple<T> {
         return cadena;
     }
     
+    /*
+     * Muestra la lista de posiciones en formato visual, separando por comas y
+     * agregando saltos de línea cada 22 posiciones para mejor legibilidad.
+     *
+     * @return Cadena con las posiciones separadas y alineadas.
+     */
     public String mostrarListaPosiciones(){
         String cadena="";
         NodoSimple aux=first;
@@ -111,6 +123,12 @@ public class ListaSimple<T> {
         return cadena;
     }
     
+    /*
+     * Muestra patrones y frecuencias en formato de reporte.
+     * Cada nodo debe ser de tipo NodoArbol.
+     *
+     * @return Cadena con el patrón, frecuencia y ubicaciones para cada nodo.
+     */
     public String mostrarPatronesFrecuencia(){
         String cadena="";
         NodoSimple aux=first;
@@ -157,7 +175,9 @@ public class ListaSimple<T> {
     }   
 
 
-    // Getters y setters
+    /*
+    * Getters y setters
+    */
     public NodoSimple getFirst() {
         return first;
     }

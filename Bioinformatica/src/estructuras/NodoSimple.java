@@ -28,7 +28,9 @@ public class NodoSimple<T> {
         this.next = null;
     }
 
-    // Getters y setters
+    /*
+    * Getters y setters
+    */
     public T getData() {
         return data;
     }

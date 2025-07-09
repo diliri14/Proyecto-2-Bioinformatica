@@ -5,6 +5,9 @@
 package estructuras;
 
 /**
+ * Clase utilitaria para traducir tripletas de ADN a su respectivo aminoácido.
+ * Usa una tabla estática para hacer la traducción rápida.
+ * Ejemplo de uso: TraductorAminoacidos.traducir("ATG") devuelve "Metionina (Inicio)".
  *
  * @author Peña
  */
@@ -84,13 +87,26 @@ public class TraductorAminoacidos {
         asignar("GGG", "Glicina");
     }
     
+    /**
+     * Asigna un aminoácido a una tripleta específica en la tabla.
+     * 
+     * @param adnTriplet Tripleta de ADN (String, por ejemplo "ATG").
+     * @param aminoAcid Nombre del aminoácido correspondiente.
+     */
     private static void asignar(String adnTriplet, String aminoAcid) {
         int index = calcularIndice(adnTriplet);
         if (index >= 0 && index < 64) {
             AMINO_ACIDS[index] = aminoAcid;
         }
     }
-
+    
+    /**
+     * Calcula el índice para una tripleta de ADN en la tabla de aminoácidos.
+     * Convierte cada base (A, C, G, T) a un número entre 0 y 3.
+     * 
+     * @param adnTriplet Tripleta de ADN a traducir.
+     * @return Índice (0-63) correspondiente a esa tripleta, o -1 si es inválida.
+     */
     private static int calcularIndice(String adnTriplet) {
         char base0 = adnTriplet.charAt(0);
         char base1 = adnTriplet.charAt(1);
@@ -101,6 +117,12 @@ public class TraductorAminoacidos {
                baseToInt(base2);
     }
     
+    /**
+     * Convierte una base (A, C, G, T) en un valor numérico.
+     * 
+     * @param base Carácter de base.
+     * @return 0 para A, 1 para C, 2 para G, 3 para T, -1 si la base es inválida.
+     */
     private static int baseToInt(char base) {
         switch(base) {
             case 'A': return 0;
@@ -111,6 +133,12 @@ public class TraductorAminoacidos {
         }
     }
     
+    /**
+     * Traduce una tripleta de ADN a su correspondiente aminoácido.
+     * 
+     * @param adnTriplet Tripleta de ADN (ejemplo: "TGG").
+     * @return Nombre del aminoácido, o "Tripleta inválida" si la entrada no es válida.
+     */
     public static String traducir(String adnTriplet) {
         int index = calcularIndice(adnTriplet);
         return index >= 0 && index < 64 ? AMINO_ACIDS[index] : "Tripleta inválida";

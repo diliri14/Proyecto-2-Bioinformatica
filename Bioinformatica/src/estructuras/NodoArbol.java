@@ -32,7 +32,9 @@ public class NodoArbol {
         this.altura = 1;
     }
 
-    // Getters y setters
+    /*
+    * Getters y setters
+    */
     public String getPatron() {
         return patron;
     }

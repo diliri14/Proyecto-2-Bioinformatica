@@ -160,7 +160,7 @@ public class Interfaz1 extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Avenir Next Condensed", 1, 15)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Reporte de colisiones");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, 470, 17));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 500, 470, 17));
 
         verInfoPatron.setBackground(new java.awt.Color(255, 224, 193));
         verInfoPatron.setColumns(20);
@@ -181,7 +181,7 @@ public class Interfaz1 extends javax.swing.JFrame {
         verPatronMasFrecuente.setRows(5);
         jScrollPane5.setViewportView(verPatronMasFrecuente);
 
-        jPanel1.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 520, 470, 100));
+        jPanel1.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 370, 470, 100));
 
         jLabel9.setFont(new java.awt.Font("Avenir Next Condensed", 3, 16)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -211,14 +211,14 @@ public class Interfaz1 extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Avenir Next Condensed", 1, 15)); // NOI18N
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("Patrón más frecuente");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 490, 470, 20));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 350, 470, 20));
 
         verReporteColision.setBackground(new java.awt.Color(255, 224, 193));
         verReporteColision.setColumns(20);
         verReporteColision.setRows(5);
         jScrollPane7.setViewportView(verReporteColision);
 
-        jPanel1.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 370, 470, 100));
+        jPanel1.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 520, 470, 100));
 
         mostrarPatrones.setBackground(new java.awt.Color(255, 204, 153));
         mostrarPatrones.setFont(new java.awt.Font("Avenir Next", 1, 13)); // NOI18N

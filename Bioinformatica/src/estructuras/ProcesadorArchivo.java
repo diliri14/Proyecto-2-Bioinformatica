@@ -11,15 +11,29 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Luis Lovera, Peña
+ * Clase encargada de leer, validar y procesar el archivo de ADN.
+ * Permite cargar la secuencia, construir la tabla hash y el árbol AVL,
+ * y generar reportes de aminoácidos.
+ * 
+ * @author Luis Mariano Lovera, Luis Peña
  */
 public class ProcesadorArchivo {
     private String secuenciaADN;
 
+    /**
+     * Constructor que inicializa el procesador con la secuencia vacía.
+     */
     public ProcesadorArchivo() {
         this.secuenciaADN = "";
     }
     
+    /**
+     * Lee el archivo seleccionado y guarda la secuencia de ADN.
+     * Valida que solo contenga caracteres A, C, G, T.
+     *
+     * @param archivoSeleccionado Archivo a leer.
+     * @return true si el archivo es válido y se pudo cargar, false en caso contrario.
+     */
     public boolean leerArchivo(File archivoSeleccionado){
         secuenciaADN="";
         try{
@@ -49,6 +63,13 @@ public class ProcesadorArchivo {
         }
     }
     
+    /**
+     * Procesa la secuencia y la divide en tripletas.
+     * Cada tripleta se inserta en la tabla hash con su posición inicial.
+     * Si la secuencia tiene caracteres sobrantes al final, los ignora y muestra advertencia.
+     *
+     * @param tabla Hashtable donde se almacenarán las tripletas y posiciones.
+     */
     public void construirTabla(Hashtable tabla){
         for (int i = 0; i < secuenciaADN.length(); i += 3) {
             if (i+3 <=secuenciaADN.length()){
@@ -62,6 +83,13 @@ public class ProcesadorArchivo {
         }
     }
     
+    /**
+     * Llena el árbol AVL con los patrones y posiciones extraídos de la tabla hash.
+     * Permite ordenar y buscar patrones por frecuencia de manera eficiente.
+     *
+     * @param tabla Hashtable con los patrones y posiciones.
+     * @param arbol Árbol AVL que será llenado con los datos de la tabla.
+     */
     public void construirArbol(Hashtable tabla, ArbolBB arbol) {
         ListaSimple<NodoArbol>patrones=tabla.obtenerPatrones();
         NodoSimple<NodoArbol>aux=patrones.getFirst();
@@ -73,6 +101,14 @@ public class ProcesadorArchivo {
         }
     }
     
+    /**
+     * Genera un reporte con la información de los aminoácidos, mostrando
+     * para cada uno las tripletas que lo forman y la frecuencia de cada tripleta.
+     * Incluye una sección especial para tripletas de inicio, STOP e inválidas.
+     *
+     * @param tabla Hashtable con los patrones de ADN.
+     * @return ListaSimple de Strings con el reporte por aminoácido.
+     */
     public ListaSimple<String> generarReporteAminoacidos(Hashtable tabla) {
         ListaSimple<String> reporte = new ListaSimple<>();
         int totalSTOP = 0;
@@ -127,6 +163,13 @@ public class ProcesadorArchivo {
         return reporte;
     }
     
+    /**
+     * Busca un aminoácido por su nombre en una lista de AminoAcidoInfo.
+     *
+     * @param lista Lista de objetos AminoAcidoInfo.
+     * @param nombre Nombre del aminoácido a buscar.
+     * @return Objeto AminoAcidoInfo correspondiente, o null si no está en la lista.
+     */
     private AminoAcidoInfo buscarAminoAcidoInfo(ListaSimple<AminoAcidoInfo> lista, String nombre) {
         NodoSimple<AminoAcidoInfo> actual = lista.getFirst();
         while (actual != null) {
