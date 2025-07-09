@@ -100,7 +100,7 @@ public class ListaSimple<T> {
             aux = aux.getNext();
             contador++;
             if (aux != null) {
-                if (contador % 15==0) {
+                if (contador % 22==0) {
                     //Espacio para que se visualizen las ubicaciones de forma alineada
                     cadena = cadena + ",\n                     ";
                 } else {
@@ -116,7 +116,22 @@ public class ListaSimple<T> {
         NodoSimple aux=first;
         while (aux != null) {
             NodoArbol nodo = (NodoArbol) aux.getData();
-            cadena += nodo.getPatron() + " | Frecuencia: " + nodo.getFrecuencias()+ "\nUbicaciones: " + nodo.getPosiciones().mostrarListaPosiciones() + "\n";
+            cadena += nodo.getPatron() + " | Frecuencia: " + nodo.getFrecuencias()+ "\nUbicaciones: ";
+            NodoSimple auxPos = nodo.getPosiciones().getFirst();
+            int contador = 0;
+            while (auxPos != null) {
+                cadena += auxPos.getData();
+                auxPos = auxPos.getNext();
+                contador++;
+                if (auxPos != null) {
+                    if (contador % 10 == 0) {
+                        cadena += ",\n             ";
+                    } else {
+                        cadena += ", ";
+                    }
+                }
+            }
+            cadena += "\n"; 
             aux = aux.getNext();
         }
         return cadena;
