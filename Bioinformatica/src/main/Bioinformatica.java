@@ -7,7 +7,7 @@ import gui.Interfaz1;
 
 /**
  *
- * @author Linares
+ * @author Linares, Lovera, Peña
  */
 public class Bioinformatica {
 

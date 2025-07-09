@@ -16,7 +16,7 @@ import java.io.File;
 
 /**
  *
- * @author Diego Linares, Luis Peña y Luis Lovera
+ * @author Linares, Peña, Lovera
  */
 public class Interfaz1 extends javax.swing.JFrame {
     private ProcesadorArchivo procesador;
@@ -156,7 +156,7 @@ public class Interfaz1 extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Avenir Next Condensed", 1, 15)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("Patrón más frecuente");
+        jLabel7.setText("Reporte de colisiones");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, 470, 17));
 
         verInfoPatron.setBackground(new java.awt.Color(255, 224, 193));
@@ -183,7 +183,7 @@ public class Interfaz1 extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Avenir Next Condensed", 3, 16)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel9.setText("Búsqueda general de patrones");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 220, 17));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 260, 17));
 
         cargarComboPatrones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cargarComboPatrones.addActionListener(new java.awt.event.ActionListener() {
@@ -207,7 +207,7 @@ public class Interfaz1 extends javax.swing.JFrame {
 
         jLabel11.setFont(new java.awt.Font("Avenir Next Condensed", 1, 15)); // NOI18N
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setText("Reporte de colisiones ");
+        jLabel11.setText("Patrón más frecuente");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 490, 470, 20));
 
         verReporteColision.setBackground(new java.awt.Color(255, 224, 193));
@@ -243,7 +243,7 @@ public class Interfaz1 extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Avenir Next Condensed", 3, 16)); // NOI18N
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel13.setText("Búsqueda específica de patrones");
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 660, 210, 20));
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 660, 270, 20));
 
         jLabel14.setFont(new java.awt.Font("Avenir", 0, 14)); // NOI18N
         jLabel14.setText("Seleccione el patrón de su interés en la lista desplegable y presione el botón de búsqueda ");
