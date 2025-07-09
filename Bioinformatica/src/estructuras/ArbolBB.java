@@ -226,27 +226,68 @@ public class ArbolBB {
         }
     }
     
-    public NodoArbol buscarMayorFrecuencia() {
+    public NodoArbol buscarNodoMayorFrecuencia(){
         NodoArbol actual=raiz;
         if (actual==null){
             return null;
-        }
-
-        while (actual.getHijoDer()!=null) {
-            actual=actual.getHijoDer();
+        }else{
+            while (actual.getHijoDer()!=null){
+                actual=actual.getHijoDer();
+            }
         }
         return actual;
     }
-    
-    public NodoArbol buscarMenorFrecuencia() {
-        NodoArbol actual = raiz;
+
+    public NodoArbol buscarNodoMenorFrecuencia(){
+    NodoArbol actual=raiz;
         if (actual==null){
             return null;
         }else{
-            while (actual.getHijoIzq()!=null) {
+            while (actual.getHijoIzq()!=null){
                 actual=actual.getHijoIzq();
             }
-            return actual;
+        }
+        return actual;
+    }
+
+    public ListaSimple<NodoArbol> buscarMayorFrecuencia() {
+        ListaSimple<NodoArbol> listaMayorFrec = new ListaSimple<>();
+        NodoArbol nodoMax = buscarNodoMayorFrecuencia();
+        if (nodoMax!=null) {
+            int freqMax=nodoMax.getFrecuencias();
+            recolectarPorFrecuencia(raiz, freqMax, listaMayorFrec);
+        }
+        return listaMayorFrec;
+    }
+
+    public ListaSimple<NodoArbol> buscarMenorFrecuencia() {
+        ListaSimple<NodoArbol> listaMenorFrec = new ListaSimple<>();
+        NodoArbol nodoMin = buscarNodoMenorFrecuencia();
+        if (nodoMin!=null) {
+            int freqMin=nodoMin.getFrecuencias();
+            recolectarPorFrecuencia(raiz, freqMin, listaMenorFrec);
+        }
+        return listaMenorFrec;
+    }   
+    
+    public void recolectarPorFrecuencia(NodoArbol nodo, int frecuenciaObjetivo, ListaSimple<NodoArbol> lista){
+        if (nodo==null){
+            return;
+        }else{
+            int freqNodo=nodo.getFrecuencias();
+
+            if (freqNodo>frecuenciaObjetivo) {
+                //Solo busca a la izquierda
+                recolectarPorFrecuencia(nodo.getHijoIzq(), frecuenciaObjetivo, lista);
+            } else if (freqNodo<frecuenciaObjetivo) {
+                //Solo busca a la derecha
+                recolectarPorFrecuencia(nodo.getHijoDer(), frecuenciaObjetivo, lista);
+            }else{
+                //Frecuencia igual: busca ambos lados y agrega (busqueda basada en inorden)
+                recolectarPorFrecuencia(nodo.getHijoIzq(), frecuenciaObjetivo, lista);
+                lista.insertarAlFinal(nodo);
+                recolectarPorFrecuencia(nodo.getHijoDer(), frecuenciaObjetivo, lista);
+            }
         }
     }
     

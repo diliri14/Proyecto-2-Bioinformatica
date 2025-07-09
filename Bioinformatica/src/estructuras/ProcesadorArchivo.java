@@ -50,20 +50,14 @@ public class ProcesadorArchivo {
     }
     
     public void construirTabla(Hashtable tabla){
-        for (int i = 0; i < secuenciaADN.length()-3; i += 3) {
-            String fragmento = secuenciaADN.substring(i, i + 3);
-            tabla.insertar(fragmento, i);     
-        }    
-    }
-    
-    //funcionalidad adicional. luego del mensaje de la advertencia abajo, se imprimiria el archivo cargado con exito.
-    public void detectorSobrantes(){
-        if (secuenciaADN==null){
-            return;
-        }else{
-            int sobrantes=secuenciaADN.length()%3;
-            if (sobrantes > 0) {
+        for (int i = 0; i < secuenciaADN.length(); i += 3) {
+            if (i+3 <=secuenciaADN.length()){
+                String fragmento = secuenciaADN.substring(i, i + 3);
+                tabla.insertar(fragmento, i);     
+            }else{
+                int sobrantes=secuenciaADN.length()-i;
                 JOptionPane.showMessageDialog(null,"La secuencia tiene " + sobrantes +" caracter(es) al final que no forman una tripleta y serán ignorados.","Advertencia", JOptionPane.WARNING_MESSAGE);
+                break;
             }
         }
     }

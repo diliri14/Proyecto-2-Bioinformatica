@@ -218,19 +218,13 @@ public class Interfaz1 extends javax.swing.JFrame {
             verListaPatrones.setText(listaPatrones.mostrarLista());
             verListaPatrones.setCaretPosition(0);
             
-            NodoArbol patronMayor = arbol.buscarMayorFrecuencia();
-            if (patronMayor != null) {
-                String infoMayor = patronMayor.getPatron()+" | Frecuencia: "+patronMayor.getFrecuencias()+"\nUbicaciones: "+patronMayor.getPosiciones().mostrarListaPosiciones();
-                verPatronMasFrecuente.setText(infoMayor);
-            }
             
-            NodoArbol patronMenor = arbol.buscarMenorFrecuencia();
-            if (patronMenor != null) {
-                String infoMenor = patronMenor.getPatron() + " | Frecuencia: " + patronMenor.getFrecuencias() +"\nUbicaciones: " + patronMenor.getPosiciones().mostrarListaPosiciones();
-            verPatronMenosFrecuente.setText(infoMenor);
-            }
-            
-            verReporteColision.setText(tabla.reporteColisiones());
+            ListaSimple<NodoArbol> patronesMayor = arbol.buscarMayorFrecuencia();
+            verPatronMasFrecuente.setText(patronesMayor.mostrarPatronesFrecuencia());
+
+            ListaSimple<NodoArbol> patronesMenor = arbol.buscarMenorFrecuencia();
+            verPatronMenosFrecuente.setText(patronesMenor.mostrarPatronesFrecuencia());
+                verReporteColision.setText(tabla.reporteColisiones());
             
         }catch (Exception e){
             JOptionPane.showMessageDialog(this, "Error al mostrar patrones: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -259,7 +253,6 @@ public class Interfaz1 extends javax.swing.JFrame {
                 }else{
                     if (procesador.leerArchivo(archivoSeleccionado)){
                         procesador.construirTabla(tabla);
-                        procesador.detectorSobrantes();
                         datosCargados=true;
                         DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>) cargarComboPatrones.getModel();
                         model.removeAllElements();

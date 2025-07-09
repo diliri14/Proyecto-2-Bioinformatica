@@ -78,9 +78,9 @@ public class ListaSimple<T> {
         return cadena;
     } 
     
-    public String mostrarListaPosiciones() {
-        String cadena = "";
-        NodoSimple aux = first;
+    public String mostrarListaPosiciones(){
+        String cadena="";
+        NodoSimple aux=first;
         int contador = 0;
         while (aux != null) {
             cadena = cadena + aux.getData();
@@ -94,6 +94,17 @@ public class ListaSimple<T> {
                     cadena = cadena + ", ";
                 }
             }
+        }
+        return cadena;
+    }
+    
+    public String mostrarPatronesFrecuencia(){
+        String cadena="";
+        NodoSimple aux=first;
+        while (aux != null) {
+            NodoArbol nodo = (NodoArbol) aux.getData();
+            cadena += nodo.getPatron() + " | Frecuencia: " + nodo.getFrecuencias()+ "\nUbicaciones: " + nodo.getPosiciones().mostrarListaPosiciones() + "\n";
+            aux = aux.getNext();
         }
         return cadena;
     }
